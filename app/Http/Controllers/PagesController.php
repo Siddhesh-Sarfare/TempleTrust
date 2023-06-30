@@ -9,7 +9,6 @@ use App\Models\Role;
 use App\Models\Slider;
 use App\Models\Upkram;
 use App\Models\User;
-use App\Models\VibhagYojana;
 use Illuminate\Support\Facades\DB;
 
 class PagesController extends Controller
@@ -49,10 +48,9 @@ class PagesController extends Controller
     public function home()
     {
         $upkramList = Upkram::orderBy('id', 'DESC')->get();
-        $vibhag = User::where('role', "<>", 'admin')->get();
         $gallery = Gallery::orderBy('id', 'DESC')->get();
         $slider = Slider::get();
-        return view('layouts.frontend.pages.home', compact('upkramList', 'gallery', 'vibhag', 'slider'));
+        return view('layouts.frontend.pages.home', compact('upkramList', 'gallery', 'slider'));
     }
 
     /**
@@ -95,30 +93,6 @@ class PagesController extends Controller
         return view('layouts.frontend.pages.gallery', compact('gallery', 'category'));
     }
 
-
-    /**
-     * department Plan
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function departmentPlan()
-    {
-        $vibhagYojanaSEO = VibhagYojana::orderBy('id', 'DESC')->get();
-        $vibhagYojana = Role::with(
-            [
-                'yojnaCategory' => function ($query) {
-                    $query->whereHas('yojna');
-                },
-                'yojnaCategory.yojna',
-                'yojnaCategory.yojna.content',
-                'yojnaCategory.yojna.content.contentFile',
-
-            ]
-        )->has('yojnaCategory')->has('yojnaCategory.yojna')->get();
-        // debug($vibhagYojana->toArray());
-        // dd($vibhagYojana->toArray());
-
-        return view('layouts.frontend.pages.department-plan', compact('vibhagYojana', 'vibhagYojanaSEO'));
-    }
 
     /**
      * contact

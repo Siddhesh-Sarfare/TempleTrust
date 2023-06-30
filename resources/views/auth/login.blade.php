@@ -1,7 +1,7 @@
 @extends('layouts.backend.master')
 
 @section('title')
-    Revenue & Forest Department - Login
+    Temple Trust - Login
 @endsection
 
 @push('styles')

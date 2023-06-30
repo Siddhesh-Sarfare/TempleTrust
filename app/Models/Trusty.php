@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class VibhagYojanaContentPdf extends Model
+class Trusty extends Model
 {
     use SoftDeletes;
 
@@ -16,7 +16,7 @@ class VibhagYojanaContentPdf extends Model
      * @var array
      */
     protected $fillable = [
-        'vibhag_yojan_content_id', 'file_name', 'file_path',
+        'name'
     ];
 
     /**

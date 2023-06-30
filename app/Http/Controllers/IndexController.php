@@ -14,9 +14,7 @@ class IndexController extends Controller
             $userRole = Auth::user()->role;
 
             if ($userRole == 'admin') {
-                return redirect()->route('admin.roles.index');
-            } else if ($userRole != 'admin') {
-                return redirect()->route('vibhag.YojanaCategory.index');
+                return redirect()->route('admin.slider.index');
             } else {
                 return redirect('/logout');
             }

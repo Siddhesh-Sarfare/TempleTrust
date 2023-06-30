@@ -18,16 +18,4 @@ class Role extends Model
     protected $fillable = [
         'name', 'created_by'
     ];
-
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = ['created_at', 'updated_at', 'deleted_at'];
-
-    public function yojnaCategory()
-    {
-        return $this->hasMany('App\Models\YojanaCategory', 'created_by');
-    }
 }

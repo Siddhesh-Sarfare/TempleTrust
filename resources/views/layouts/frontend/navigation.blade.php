@@ -136,9 +136,6 @@
                             <a class="dropdown-item" href="{{ route('prashasan') }}">प्रशासन</a>
                         </div>
                     </li> --}}
-                    {{-- <li class="nav-item {{ request()->is('department-plan') ? 'active' : '' }}">
-                        <a class="nav-link" href="{{ route('department-plan') }}" aria-label="Department and Yojana">विभाग</a>
-                    </li> --}}
                     {{-- <li class="nav-item">
                         <a class="nav-link" onclick="window.open(this.href,'_blank');return false;" href="https://rfd.maharashtra.gov.in/sites/default/files/revised_subject_list.pdf" aria-label="yadi">टेलिफोन डिरेक्टरी</a>
                     </li> --}}

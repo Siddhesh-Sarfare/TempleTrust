@@ -13,8 +13,6 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ContactController as ControllersContactController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\PagesController;
-use App\Http\Controllers\Vibhag\VibhagYojanaController;
-use App\Http\Controllers\Vibhag\YojanaCategoryController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -40,7 +38,6 @@ Route::group(['middleware' => ['throttle:25,1']], function () {
     Route::get('home', [PagesController::class, 'home'])->name('home');
     Route::get('upkram-detail/{id}', [PagesController::class, 'upkramDetail'])->name('upkram-detail');
     Route::get('prashasan', [PagesController::class, 'prashasan'])->name('prashasan');
-    Route::get('department-plan', [PagesController::class, 'departmentPlan'])->name('department-plan');
     Route::get('gallery', [PagesController::class, 'gallery'])->name('gallery');
     Route::get('contact', [PagesController::class, 'contact'])->name('contact');
     Route::post('contact', [ControllersContactController::class, 'contactStore'])->name('contactStore');
@@ -156,38 +153,6 @@ Route::middleware(['auth', 'role.checker:admin', 'throttle:100,1'])->group(funct
                 Route::delete('contact/delete/{id}', [ContactController::class, 'destroy'])->name('delete'); // delete existing Contact
                 Route::get('contact/deleted/show', [ContactController::class, 'showDeleted'])->name('deleted.show'); // delete existing Contact
                 Route::put('contact/deleted/restore/{id}', [ContactController::class, 'restoreDeleted'])->name('deleted.restore'); // delete existing Contact
-            });
-        });
-    });
-});
-
-//Vibhag Routes
-Route::middleware(['auth', 'not.role.checker:admin', 'throttle:100,1'])->group(function () {
-    Route::prefix('vibhag')->group(function () {
-        Route::name('vibhag.')->group(function () {
-
-            // Yojana Category
-            Route::name('YojanaCategory.')->group(function () {
-                Route::get('YojanaCategory', [YojanaCategoryController::class, 'index'])->name('index'); // show all YojanaCategory
-                Route::get('YojanaCategory/create', [YojanaCategoryController::class, 'create'])->name('create'); // show the add new YojanaCategory
-                Route::post('YojanaCategory', [YojanaCategoryController::class, 'store'])->name('store'); // store new YojanaCategory
-                Route::get('YojanaCategory/edit/{id}', [YojanaCategoryController::class, 'edit'])->name('edit'); // edit existing YojanaCategory
-                Route::patch('YojanaCategory/update/{id}', [YojanaCategoryController::class, 'update'])->name('update'); // update existing YojanaCategory
-                Route::delete('YojanaCategory/delete/{id}', [YojanaCategoryController::class, 'destroy'])->name('delete'); // delete existing YojanaCategory
-                Route::get('YojanaCategory/deleted/show', [YojanaCategoryController::class, 'showDeleted'])->name('deleted.show'); // delete existing YojanaCategory
-                Route::put('YojanaCategory/deleted/restore/{id}', [YojanaCategoryController::class, 'restoreDeleted'])->name('deleted.restore'); // delete existing YojanaCategory
-            });
-
-            // Vibhag and Yojana
-            Route::name('vibhag-yojana.')->group(function () {
-                Route::get('vibhag-yojana', [VibhagYojanaController::class, 'index'])->name('index'); // show all vibhag-yojana
-                Route::get('vibhag-yojana/create', [VibhagYojanaController::class, 'create'])->name('create'); // show the add new vibhag-yojana
-                Route::post('vibhag-yojana', [VibhagYojanaController::class, 'store'])->name('store'); // store new vibhag-yojana
-                Route::get('vibhag-yojana/edit/{id}', [VibhagYojanaController::class, 'edit'])->name('edit'); // edit existing vibhag-yojana
-                Route::patch('vibhag-yojana/update/{id}', [VibhagYojanaController::class, 'update'])->name('update'); // update existing vibhag-yojana
-                Route::delete('vibhag-yojana/delete/{id}', [VibhagYojanaController::class, 'destroy'])->name('delete'); // delete existing vibhag-yojana
-                Route::get('vibhag-yojana/deleted/show', [VibhagYojanaController::class, 'showDeleted'])->name('deleted.show'); // delete existing vibhag-yojana
-                Route::put('vibhag-yojana/deleted/restore/{id}', [VibhagYojanaController::class, 'restoreDeleted'])->name('deleted.restore'); // delete existing vibhag-yojana
             });
         });
     });
